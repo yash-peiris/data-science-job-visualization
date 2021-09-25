@@ -11,7 +11,7 @@
         }
   },
   "transform": [{
-      "lookup": "STATE_NAME",
+      "lookup": "properties.STATE_NAME",
       "from": {
         "data": {
           "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/State-Breakdown.csv"
@@ -19,7 +19,8 @@
         "key": "State",
         "fields": ["Listings"]
       }
-    }
+    },
+{"calculate": "datum.Listings", "as": "Listings"}
   ],
   "projection": {
     "type": "equirectangular"
@@ -30,10 +31,15 @@
   "encoding": {
     "color": {
       "field": "Listings",
-      "type": "quantitative"
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [100, 200, 300,400,500],
+        "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603","#81B622", "#FFA500"]
+        }
     },
     "tooltip": [
-      {"field": "STATE_NAME", "type": "nominal", "title": "State"},
+      {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
       {"field": "Listings", "type": "quantitative"}
     ]
   }
