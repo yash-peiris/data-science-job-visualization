@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Data Science Job Listings Australia",
+  "width": 800,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+    "format": {
+          "type": "topojson",
+          "feature": "Australian-states"
+        }
+  },
+  "transform": [{
+      "lookup": "STATE_NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/State-Breakdown.csv"
+        },
+        "key": "State",
+        "fields": ["Listings"]
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular"
+  },
+  "mark": {
+    "type": "geoshape"
+    },
+  "encoding": {
+    "color": {
+      "field": "Listings",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {"field": "STATE_NAME", "type": "nominal", "title": "State"},
+      {"field": "Listings", "type": "quantitative"}
+    ]
+  }
+
+}
