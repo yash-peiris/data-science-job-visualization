@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Data Science Job Listings Australia",
-  "width": 800,
-  "height": 600,
+  "width": "container",
+  "height": 500,
   "data": {
     "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
     "format": {
