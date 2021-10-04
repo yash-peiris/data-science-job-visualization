@@ -15,7 +15,7 @@
       },
       "y": {
         "field": "Jobs",
-        "aggregate": "mean"
+        "aggregate" :"sum"
       },
       "color": {
         "timeUnit": "year",
