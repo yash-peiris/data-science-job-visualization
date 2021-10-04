@@ -15,12 +15,14 @@
       },
       "y": {
         "field": "Jobs",
-        "aggregate" :"sum"
+        "aggregate" :"sum",
+        "scale": {"domain": [0, 100]},
+        "title": "Job Listings"
       },
       "color": {
         "timeUnit": "year",
         "type": "nominal",
-        "field": "date",
+        "field": "Date",
         "title": "Year"
       }
     },
