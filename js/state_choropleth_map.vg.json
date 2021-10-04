@@ -4,7 +4,7 @@
   "width": "container",
   "height": 500,
   "data": {
-    "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+    "url": "https://raw.githubusercontent.com/yash-peiris/FIT3179-Week-9-Homework/main/js/Australian-states.topojson",
     "format": {
           "type": "topojson",
           "feature": "Australian-states"
@@ -14,7 +14,7 @@
       "lookup": "properties.STATE_NAME",
       "from": {
         "data": {
-          "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/State-Breakdown.csv"
+          "url": "https://raw.githubusercontent.com/yash-peiris/FIT3179-Week-9-Homework/main/data/State-Breakdown.csv"
         },
         "key": "State",
         "fields": ["Listings"]
