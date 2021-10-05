@@ -3,8 +3,20 @@
     "data": {
       "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-class.csv"
     },
+      "transform": [
+    {
+      "aggregate": [{
+       "op": "sum",
+       "field": "Jobs",
+       "as": "tot_job"
+      }],
+      "groupby": ["jobSubClassification"]
+    },
+    {"filter": {"field": "tot_job", "range":[20,270]}}
+  ],
+  
     "width": "container",
-    "height" : 500,
+    "height" : 300,
     "mark": {
       "type": "bar"
     },
@@ -14,7 +26,7 @@
         "type": "nominal"    
       },
       "y": {
-        "field": "Jobs",
+        "field": "tot_job",
         "aggregate" :"sum",
         "type": "quantitative",
         "title": "Job Listings"
