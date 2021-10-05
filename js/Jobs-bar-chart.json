@@ -10,7 +10,7 @@
     },
     "encoding": {
       "x": {
-        "field": "jobClassification",
+        "field": "jobSubClassification",
         "type": "nominal"    
       },
       "y": {
@@ -21,8 +21,8 @@
       },
       "color": {
         "type": "nominal",
-        "field": "jobClassification",
-        "title": "Job Classification"
+        "field": "jobSubClassification",
+        "title": "Job Sub Classification"
       }
     },
     "config": {}
