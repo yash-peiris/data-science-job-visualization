@@ -1,30 +1,28 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
-      "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-date.csv"
+      "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-class.csv"
     },
     "width": "container",
     "height" : 500,
     "mark": {
-      "type": "line",
-      "interpolate": "monotone"
+      "type": "bar"
     },
     "encoding": {
       "x": {
-        "field": "Date",
-        "timeUnit": "month"
+        "field": "jobClassification",
+        "type": "nominal"    
       },
       "y": {
         "field": "Jobs",
         "aggregate" :"sum",
-        "scale": {"domain": [0, 200]},
+        "type": "quantitative",
         "title": "Job Listings"
       },
       "color": {
-        "timeUnit": "year",
         "type": "nominal",
-        "field": "Date",
-        "title": "Year"
+        "field": "jobClassification",
+        "title": "Job Classification"
       }
     },
     "config": {}
