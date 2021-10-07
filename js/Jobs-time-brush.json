@@ -1,0 +1,39 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": { "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-date-state.csv" },
+    "vconcat": [{
+        "width": "container",
+        "height": 240,
+        "mark": "area",
+        "encoding": {
+            "x": {
+                "field": "Date",
+                "type": "temporal",
+                "scale": { "domain": { "param": "brush" } },
+                "axis": { "title": "", "tickCount": 10 }
+            },
+            "y": { "field": "Jobs", "type": "quantitative" ,"aggregate":"sum"}
+        }
+    }, {
+        "width": "container",
+        "height": 60,
+        "mark": "area",
+        "params": [{
+            "name": "brush",
+            "select": { "type": "interval", "encodings": ["x"] }
+        }],
+        "encoding": {
+            "x": {
+                "field": "Date",
+                "type": "temporal",
+                "axis": { "tickCount": 10 }
+            },
+            "y": {
+                "field": "Jobs",
+                "type": "quantitative",
+                "aggregate" : "sum",
+                "axis": { "tickCount": 3, "grid": false }
+            }
+        }
+    }]
+}
