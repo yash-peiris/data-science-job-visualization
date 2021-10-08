@@ -1,47 +1,88 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Data Science Job Listings Australia",
+  "title": "Median house price per suburb (2010-2020)",
   "width": "container",
   "height": 500,
-  "data": {
-    "url": "https://raw.githubusercontent.com/yash-peiris/FIT3179-Week-9-Homework/main/js/Australian-states.topojson",
-    "format": {
-          "type": "topojson",
-          "feature": "Australian-states"
-        }
-  },
-  "transform": [{
-      "lookup": "properties.STATE_NAME",
-      "from": {
-        "data": {
-          "url": "https://raw.githubusercontent.com/yash-peiris/FIT3179-Week-9-Homework/main/data/State-Breakdown.csv"
-        },
-        "key": "State",
-        "fields": ["Listings"]
-      }
-    },
-{"calculate": "datum.Listings", "as": "Listings"}
-  ],
   "projection": {
-    "type": "equirectangular"
+      "type": "equirectangular"
   },
-  "mark": {
-    "type": "geoshape"
-    },
-  "encoding": {
-    "color": {
-      "field": "Listings",
-      "type": "quantitative",
-      "scale": {
-        "type": "threshold",
-        "domain": [100, 200, 300,400,500],
-        "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603","#81B622", "#FFA500"]
-        }
-    },
-    "tooltip": [
-      {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
-      {"field": "Listings", "type": "quantitative"}
-    ]
-  }
-
+  "params": [{
+          "name": "Year_selection",
+          "value": 2021,
+          "bind": {
+              "input": "range",
+              "min": 2019,
+              "max": 2021,
+              "step": 1,
+              "name": "Year:  "
+          }
+      }
+  ],
+  "layer": [{
+          "data": {
+              "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+              "format": { "type": "topojson", "feature": "Australian-states" }
+          },
+          "transform": [{
+              "calculate": "'Data is not available in ' + datum.properties.STATE_NAME",
+              "as": "note"
+          }],
+          "mark": {
+              "type": "geoshape",
+              "fill": "#ddd",
+              "stroke": "white",
+              "strokeWidth": 1
+          },
+          "encoding": { "tooltip": { "field": "note" } }
+      },
+      {
+          "data": {
+              "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-date-state.csv"
+          },
+          "transform": [{
+                  "lookup": "state",
+                  "from": {
+                      "data": {
+                          "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+                          "format": {
+                              "type": "topojson",
+                              "feature": "Australian-states"
+                          }
+                      },
+                      "key": "properties.STATE_NAME"
+                  },
+                  "as": "geo"
+              },
+              { "filter": "datum.Year == Year_selection" }
+          ],
+          "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+          "encoding": {
+              "shape": { "field": "geo", "type": "geojson" },
+              "color": {
+                  "field": "Jobs",
+                  "type": "quantitative",
+                  "scale": {
+                      "domain": [
+                          0,
+                          600
+                      ],
+                      "scheme": "blues"
+                  },
+                  "legend": { "format": ".2s" }
+              },
+              "tooltip": [
+                  { "field": "state", "type": "nominal", "title": "State" },
+                  {
+                      "field": "Jobs",
+                      "type": "quantitative",
+                      "title": "Number of Jobs",
+                      "format": ","
+                  },
+                  { "field": "Year", "type": "quantitative", "title": "Year" }
+              ]
+          }
+      }
+  ],
+  "config": {}
 }
+
