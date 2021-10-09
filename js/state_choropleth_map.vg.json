@@ -24,7 +24,7 @@
               "format": { "type": "topojson", "feature": "Australian-states" }
           },
           "transform": [{
-              "calculate": "'Data is not available in ' + datum.properties.STATE_NAME",
+              "calculate": "'No Jobs Listed on Seek in ' + datum.properties.STATE_NAME",
               "as": "note"
           }],
           "mark": {
@@ -62,13 +62,9 @@
                   "field": "Jobs",
                   "type": "quantitative",
                   "scale": {
-                      "domain": [
-                          0,
-                          600
-                      ],
-                      "scheme": "blues"
-                  },
-                  "legend": { "format": ".2s" }
+                      "domain": [0,100,200,300,700],
+                      "range": ["#BFD7ED","#60A3D9","#0074B7",  "#003B73","#0C2D48"]
+                  }
               },
               "tooltip": [
                   { "field": "state", "type": "nominal", "title": "State" },

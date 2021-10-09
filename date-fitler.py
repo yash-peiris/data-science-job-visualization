@@ -13,11 +13,11 @@
 import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn'
 
-df = pd.read_csv("data\Jobs-per-date-state.csv")
+df = pd.read_csv("data\Vic-data.csv")
 df['Jobs'] = 1
 
-df_date = df[['Year','state','Jobs']]
-df_date = df_date.groupby(['Year','state'],as_index = False)['Jobs'].sum()
+df_date = df[['listingYear','suburb','Jobs']]
+df_date = df_date.groupby(['listingYear','suburb'],as_index = False)['Jobs'].sum()
 print(df_date)
 
-df_date.to_csv('Jobs-per-date-state.csv', index=False)
+df_date.to_csv('Jobs-per-date-suburb.csv', index=False)
