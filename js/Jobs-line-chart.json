@@ -4,7 +4,7 @@
     "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-date.csv"
   },
   "width": "container",
-  "height" : 500,
+  "height" : 400,
   "mark": {
     "type": "line",
     "interpolate": "monotone"
