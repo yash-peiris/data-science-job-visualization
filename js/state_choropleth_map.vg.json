@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Median house price per suburb (2010-2020)",
+  "width": "container",
+  "height": 500,
+  "projection": {
+      "type": "equirectangular"
+  },
+  "params": [{
+          "name": "Year_selection",
+          "value": 2021,
+          "bind": {
+              "input": "range",
+              "min": 2019,
+              "max": 2021,
+              "step": 1,
+              "name": "Year:  "
+          }
+      }
+  ],
+  "layer": [{
+          "data": {
+              "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+              "format": { "type": "topojson", "feature": "Australian-states" }
+          },
+          "transform": [{
+              "calculate": "'No Jobs Listed on Seek in ' + datum.properties.STATE_NAME",
+              "as": "note"
+          }],
+          "mark": {
+              "type": "geoshape",
+              "fill": "#ddd",
+              "stroke": "white",
+              "strokeWidth": 1
+          },
+          "encoding": { "tooltip": { "field": "note" } }
+      },
+      {
+          "data": {
+              "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-date-state.csv"
+          },
+          "transform": [{
+                  "lookup": "state",
+                  "from": {
+                      "data": {
+                          "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/js/Australian-states.topojson",
+                          "format": {
+                              "type": "topojson",
+                              "feature": "Australian-states"
+                          }
+                      },
+                      "key": "properties.STATE_NAME"
+                  },
+                  "as": "geo"
+              },
+              { "filter": "datum.Year == Year_selection" }
+          ],
+          "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+          "encoding": {
+              "shape": { "field": "geo", "type": "geojson" },
+              "color": {
+                  "field": "Jobs",
+                  "type": "quantitative",
+                  "scale": {
+                      "domain": [0,100,200,300,700],
+                      "range": ["#BFD7ED","#60A3D9","#0074B7",  "#003B73","#0C2D48"]
+                  }
+              },
+              "tooltip": [
+                  { "field": "state", "type": "nominal", "title": "State" },
+                  {
+                      "field": "Jobs",
+                      "type": "quantitative",
+                      "title": "Number of Jobs",
+                      "format": ","
+                  },
+                  { "field": "Year", "type": "quantitative", "title": "Year" }
+              ]
+          }
+      }
+  ],
+  "config": {}
+}
+

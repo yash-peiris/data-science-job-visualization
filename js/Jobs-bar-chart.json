@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-class.csv"
+  },
+    "transform": [
+  {
+    "aggregate": [{
+     "op": "sum",
+     "field": "Jobs",
+     "as": "tot_job"
+    }],
+    "groupby": ["jobSubClassification"]
+  },
+  {"filter": {"field": "tot_job", "range":[30,270]}}
+],
+
+  "width": "500",
+  "height" : 300,
+  "mark": {
+    "type": "bar"
+  },
+  "encoding": {
+    "y": {
+      "field": "jobSubClassification",
+      "type": "nominal" ,
+      "title" : "Job Sub Classification",
+      "axis" : {
+        "labels": false
+      } 
+    },
+    "x": {
+      "field": "tot_job",
+      "aggregate" :"sum",
+      "type": "quantitative",
+      "title": "Job Listings"
+    },
+    "color": {
+      "type": "nominal",
+      "field": "jobSubClassification",
+      "title": "Job Sub Classification"
+    }
+  },
+  "config": {}
+}

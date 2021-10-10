@@ -9,6 +9,15 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <!-- Vega Lite -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -84,8 +93,9 @@
       <div class="container">
 
         <div class="row justify-content-between">
-          <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
-            <img src="assets/img/about-img.svg" class="img-fluid" alt="" data-aos="zoom-in">
+          <!-- <div class="col-lg-5 d-flex align-items-center justify-content-center "> -->
+          <div class="col-lg-5 d-flex align-items-center justify-content-center ">
+            <div class="linechart" id="Job_line_chart"></div>
           </div>
           <div class="col-lg-6 pt-5 pt-lg-0">
             <h3 data-aos="fade-up">Which States Provide the Most Job Oppurtunities?</h3>
@@ -390,6 +400,27 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Vega Lite Visualization Scipts -->
+  <script type="text/javascript">
+
+    var ausMap = "js/state_choropleth_map.vg.json";
+    var jobLineChart = "js/Jobs-line-chart.json";
+    var jobBarChart = "js/Jobs-bar-chart.json";
+  
+    vegaEmbed('#choropleth_map', ausMap).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  
+    vegaEmbed('#Job_line_chart', jobLineChart).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  
+    vegaEmbed('#Job_bar_chart', jobBarChart).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+  
 
 </body>
 
