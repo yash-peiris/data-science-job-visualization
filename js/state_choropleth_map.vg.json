@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Median house price per suburb (2010-2020)",
+    "title": "Job Listings Australia",
     "width": "container",
     "height": 500,
     "projection": {

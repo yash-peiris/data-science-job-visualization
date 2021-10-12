@@ -5,40 +5,49 @@
   },
     "transform": [
   {
-    "aggregate": [{
-     "op": "sum",
-     "field": "Jobs",
-     "as": "tot_job"
-    }],
-    "groupby": ["jobSubClassification"]
-  },
-  {"filter": {"field": "tot_job", "range":[30,270]}}
+     "window": [{
+      "op": "sum",
+      "field": "Jobs",
+      "as": "TotalJobs"
+    }
+    ],
+    "frame": [null, null]
+    },   
+    {
+      "filter" : "datum.Jobs>=90"
+    },
+
+    {
+    "calculate": "datum.Jobs/datum.TotalJobs * 100",
+    "as": "PercentOfTotal"
+  }
+  
 ],
 
-  "width": "500",
+  "width": 500,
   "height" : 300,
   "mark": {
     "type": "bar"
   },
   "encoding": {
     "y": {
-      "field": "jobSubClassification",
+      "field": "jobClassification",
       "type": "nominal" ,
       "title" : "Job Sub Classification",
       "axis" : {
         "labels": false
-      } 
+      },
+       "sort": {"field": "Jobs", "op": "average", "order":"descending"} 
     },
     "x": {
-      "field": "tot_job",
-      "aggregate" :"sum",
+      "field": "PercentOfTotal",
       "type": "quantitative",
-      "title": "Job Listings"
+      "title": "Percentage of Total Job Listings"
     },
     "color": {
       "type": "nominal",
-      "field": "jobSubClassification",
-      "title": "Job Sub Classification"
+      "field": "jobClassification",
+      "title": "Job Classification"
     }
   },
   "config": {}

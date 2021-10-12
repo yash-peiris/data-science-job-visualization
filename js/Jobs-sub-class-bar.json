@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/yash-peiris/data-science-job-visualization/main/data/Jobs-per-sub-class.csv"
+    },
+      "transform": [
+    {
+       "window": [{
+        "op": "sum",
+        "field": "Jobs",
+        "as": "TotalJobs"
+      }
+      ],
+      "frame": [null, null]
+      },
+      {
+        "filter":"datum.Jobs>150"
+      },
+      {
+      "calculate": "datum.Jobs/datum.TotalJobs * 100",
+      "as": "PercentOfTotal"
+    }
+    
+  ],
+  
+    "width": 500,
+    "height" : 300,
+    "mark": {
+      "type": "bar"
+    },
+    "encoding": {
+      "y": {
+        "field": "jobSubClassification",
+        "type": "nominal" ,
+        "title" : "Job Sub Classification",
+        "axis" : {
+          "labels": false
+        },
+         "sort": {"field": "Jobs", "op": "average", "order":"descending"} 
+      },
+      "x": {
+        "field": "PercentOfTotal",
+        "type": "quantitative",
+        "title": "Percentage of Total Job Listings"
+      },
+      "color": {
+        "type": "nominal",
+        "field": "jobSubClassification",
+        "title": "Job Sub Classification"
+      },
+      "tooltip":[{ "field" :"jobSubClassification", "type": "nominal","title":"Job Sub Classification "},
+      {"field":"Jobs","type": "quantitative","title":"Number of Listings"}
+      
+      ]
+  
+    },
+    "config": {}
+  }
