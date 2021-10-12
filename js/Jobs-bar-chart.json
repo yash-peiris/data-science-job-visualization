@@ -24,7 +24,7 @@
   
 ],
 
-  "width": 500,
+  "width": "container",
   "height" : 300,
   "mark": {
     "type": "bar"
