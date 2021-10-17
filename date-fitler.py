@@ -16,8 +16,9 @@ pd.options.mode.chained_assignment = None  # default='warn'
 df = pd.read_csv("data\listings2019_2021.csv")
 df['Jobs'] = 1
 
-df_date = df[['jobSubClassification','Jobs']]
-df_date = df_date.groupby(['jobSubClassification'],as_index = False)['Jobs'].sum()
+
+df_date = df[['listingMonthYear','listingYear','Jobs']]
+df_date = df_date.groupby(['listingMonthYear','listingYear'],as_index = False)['Jobs'].sum()
 print(df_date)
 
-df_date.to_csv('Jobs-per-sub-class.csv', index=False)
+df_date.to_csv('Jobs-per-month-year.csv', index=False)
