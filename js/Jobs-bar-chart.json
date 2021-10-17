@@ -33,7 +33,7 @@
     "y": {
       "field": "jobClassification",
       "type": "nominal" ,
-      "title" : "Job Sub Classification",
+      "title" : "",
       "axis" : {
         "labels": false
       },
@@ -47,8 +47,20 @@
     "color": {
       "type": "nominal",
       "field": "jobClassification",
-      "title": "Job Classification"
-    }
+      "title": "Field",
+      "scale": {"range": ["#56B4E9", "#EC0C1E", "#FFC107","#0072B2","#009E73"]}
+    },
+    "tooltip": [
+                    { "field": "jobClassification", "type": "nominal", "title": "State" },
+                    {
+                        "field": "Jobs",
+                        "type": "quantitative",
+                        "title": "Number of Jobs",
+                        "format": ","
+                    },
+                    { "field": "PercentOfTotal", "type": "quantitative", "title": "Percentage" }
+                ]
   },
+  
   "config": {}
 }
