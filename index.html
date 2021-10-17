@@ -249,19 +249,19 @@
     var jobSubClassBarChart = 'js/Jobs-sub-class-bar.json';
 
   
-    vegaEmbed('#choropleth_map', ausMap).then(function(result) {
+    vegaEmbed('#choropleth_map', ausMap,{"actions":false}).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   
-    vegaEmbed('#Job_line_chart', jobLineChart).then(function(result) {
+    vegaEmbed('#Job_line_chart', jobLineChart,{"actions":false}).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   
-    vegaEmbed('#Job_bar_chart', jobBarChart).then(function(result) {
+    vegaEmbed('#Job_bar_chart', jobBarChart,{"actions":false}).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#Job_subClass_bar_chart', jobSubClassBarChart).then(function(result) {
+    vegaEmbed('#Job_subClass_bar_chart', jobSubClassBarChart,{"actions":false}).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
