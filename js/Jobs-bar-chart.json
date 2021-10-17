@@ -58,7 +58,7 @@
                         "title": "Number of Jobs",
                         "format": ","
                     },
-                    { "field": "PercentOfTotal", "type": "quantitative", "title": "Percentage" }
+                    { "field": "PercentOfTotal", "type": "quantitative", "title": "Percentage","format":".2f" }
                 ]
   },
   

@@ -12,13 +12,17 @@
   "encoding": {
     "x": {
       "field": "Date",
-      "timeUnit": "month"
+      "timeUnit": "month",
+      "title" : "Month",
+      "axis" : {
+        "gridOpacity":0
+      }
     },
     "y": {
       "field": "Jobs",
       "aggregate" :"sum",
       "scale": {"domain": [0, 200]},
-      "title": "Job Listings"
+      "title": "Number of Listings"
     },
     "color": {
       "timeUnit": "year",
@@ -27,10 +31,13 @@
       "title": "Year",
       "scale": {
                     "domain": [2019,2020,2021],
-                    "range": ["#60A3D9","#0073b7","#0C2D48"]
+                    "range": ["#C5C5C5","#FF0000","#145DA0"]
                 }
       
-    }
+    },
+     "tooltip": [
+                    { "field": "Date", "type": "temporal", "timeUnit": "year" }
+                ]
   },
   "config": {}
 }
