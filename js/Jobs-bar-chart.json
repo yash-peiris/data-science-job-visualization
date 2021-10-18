@@ -26,9 +26,7 @@
 
   "width": "container",
   "height" : 300,
-  "mark": {
-    "type": "bar"
-  },
+  
   "encoding": {
     "y": {
       "field": "jobClassification",
@@ -42,13 +40,18 @@
     "x": {
       "field": "PercentOfTotal",
       "type": "quantitative",
-      "title": "Percentage of Total Job Listings"
+      "title": "Percentage of Total Job Listings",
+       "scale": {"domain": [0, 60]}
     },
     "color": {
       "type": "nominal",
       "field": "jobClassification",
       "title": "Field",
       "scale": {"range": ["#56B4E9", "#EC0C1E", "#FFC107","#0072B2","#009E73"]}
+    },
+      "opacity": {
+      "condition": {"param": "jobclassparm", "value": 1},
+      "value": 0.2
     },
     "tooltip": [
                     { "field": "jobClassification", "type": "nominal", "title": "State" },
@@ -61,6 +64,21 @@
                     { "field": "PercentOfTotal", "type": "quantitative", "title": "Percentage","format":".2f" }
                 ]
   },
-  
+  "layer": [{
+    "mark": {
+    "type": "bar"
+  },
+  "params": [{
+    "name": "jobclassparm",
+    "select": {"type": "point", "fields": ["jobClassification"]},
+    "bind": "legend"
+  }]
+  },
+ {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+      "encoding": {"text": {"field": "PercentOfTotal", "type": "quantitative", "format":".2f"}}
+    }
+  ],
   "config": {}
 }
+

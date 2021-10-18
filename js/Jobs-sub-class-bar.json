@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
@@ -25,9 +26,6 @@
 
   "width": "container",
   "height" : 300,
-  "mark": {
-    "type": "bar"
-  },
   "encoding": {
     "y": {
       "field": "jobSubClassification",
@@ -41,12 +39,17 @@
     "x": {
       "field": "PercentOfTotal",
       "type": "quantitative",
-      "title": "Percentage of Total Job Listings"
+      "title": "Percentage of Total Job Listings",
+       "scale": {"domain": [0, 25]}
     },
     "color": {
       "type": "nominal",
       "field": "jobSubClassification",
       "title": "Job Sub Classification"
+    },
+    "opacity": {
+      "condition": {"param": "jobsubclassparm", "value": 1},
+      "value": 0.2
     },
     "tooltip":[{ "field" :"jobSubClassification", "type": "nominal","title":"Job Sub Classification "},
     {"field":"Jobs","type": "quantitative","title":"Number of Listings"},
@@ -55,5 +58,19 @@
     ]
 
   },
+  "layer": [{
+    "mark": {
+    "type": "bar"
+  },
+  "params": [{
+    "name": "jobsubclassparm",
+    "select": {"type": "point", "fields": ["jobSubClassification"]},
+    "bind": "legend"
+  }]},
+ {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+      "encoding": {"text": {"field": "PercentOfTotal", "type": "quantitative", "format":".2f"}}
+    }
+  ],
   "config": {}
 }
